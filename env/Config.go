@@ -6,13 +6,25 @@ import "github.com/sudtanj/Go-SwissKnife/env/value_types"
 
 type IConfig interface {
 	GetEnv() value_types.EnvConst
+	GetPort() string
+	GetAddr() string
 }
 
 // do composition with this struct, this struct is design to work with viper
 type RequiredConfig struct {
-	Env value_types.EnvConst `yaml:"env"`
+	Env  value_types.EnvConst `yaml:"env"`
+	Port string               `yaml:"port"`
+	Addr string               `yaml:"addr"`
 }
 
 func (c RequiredConfig) GetEnv() value_types.EnvConst {
 	return c.Env
+}
+
+func (c RequiredConfig) GetPort() string {
+	return c.Port
+}
+
+func (c RequiredConfig) GetAddr() string {
+	return c.Addr
 }
