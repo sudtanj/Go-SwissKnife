@@ -13,6 +13,6 @@ type RequiredConfig struct {
 	Env string `yaml:"env"`
 }
 
-func (c *RequiredConfig) GetEnv() string {
+func (c *RequiredConfig) GetEnv() value_types.EnvConst {
 	return c.Env
 }
