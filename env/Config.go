@@ -10,9 +10,9 @@ type IConfig interface {
 
 // do composition with this struct, this struct is design to work with viper
 type RequiredConfig struct {
-	Env string `yaml:"env"`
+	Env value_types.EnvConst `yaml:"env"`
 }
 
-func (c *RequiredConfig) GetEnv() value_types.EnvConst {
+func (c RequiredConfig) GetEnv() value_types.EnvConst {
 	return c.Env
 }
