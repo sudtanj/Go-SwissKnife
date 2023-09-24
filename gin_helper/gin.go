@@ -2,6 +2,7 @@ package gin_helper
 
 import (
 	helmet "github.com/danielkov/gin-helmet"
+	nice "github.com/ekyoung/gin-nice-recovery"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/sudtanj/Go-SwissKnife/env"
@@ -37,6 +38,7 @@ func (g *GinHelper[T]) Initialize() *gin.Engine {
 	}
 	g.r.Use(helmet.Default())
 	g.r.Use(cors.Default())
+	g.r.Use(nice.Recovery(recoveryHandler))
 
 	err = g.r.Run(g.GetAddr())
 	if err != nil {
