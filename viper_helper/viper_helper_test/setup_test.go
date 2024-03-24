@@ -1,4 +1,4 @@
-package progic_viper_test
+package viper_helper
 
 import (
 	"github.com/stretchr/testify/assert"
@@ -12,8 +12,10 @@ func Test_Initialize(t *testing.T) {
 	t.Run("success load env", func(t *testing.T) {
 		s, err := os.Getwd()
 		assert.NoError(t, err)
-		c := viper_helper.Initialize[env.RequiredConfig](s, "config.test")
+		c := viper_helper.Initialize[TestCompositionConfig](s, "config.test")
 
-		assert.Equal(t, c, env.RequiredConfig{Env: "local", Port: "8081", Addr: ""})
+		assert.Equal(t, c, TestCompositionConfig{
+			RequiredConfig: env.RequiredConfig{Env: "local", Port: "8081", Addr: ""},
+		})
 	})
 }
