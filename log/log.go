@@ -17,6 +17,11 @@ type Log[T env.IConfig] struct {
 	loggerConditional interfaces.IConditional[*zap.Logger]
 }
 
+func InitializeLog[T env.IConfig](config T) *zapAdapter.Logger {
+	inst := NewLog[T](config)
+	return inst.Initialize()
+}
+
 func NewLog[T env.IConfig](config T) *Log[T] {
 	return &Log[T]{
 		config,
