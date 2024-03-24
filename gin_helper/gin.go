@@ -19,6 +19,21 @@ type GinHelper[T env.IConfig] struct {
 	r      *gin.Engine
 }
 
+type IGinHelperRouter interface {
+	InjectRoute()
+}
+
+type IGinHelperRouteInitializer[T IGinHelperRouter] interface {
+	InitializeRouter(g *gin.Engine) T
+}
+
+func InitializeGin[T env.IConfig, V IGinHelperRouteInitializer[IGinHelperRouter]](config T, router V) {
+	ginHelper := NewGinHelper(config)
+	handler := router.InitializeRouter(ginHelper.GetEngine())
+	handler.InjectRoute()
+	ginHelper.Initialize()
+}
+
 func NewGinHelper[T env.IConfig](config T) *GinHelper[T] {
 	return &GinHelper[T]{
 		config,
