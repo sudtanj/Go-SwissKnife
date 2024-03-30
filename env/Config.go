@@ -12,9 +12,9 @@ type IConfig interface {
 
 // do composition with this struct, this struct is design to work with viper
 type RequiredConfig struct {
-	Env  value_types.EnvConst `yaml:"env"`
-	Port string               `yaml:"port"`
-	Addr string               `yaml:"addr"`
+	Env  value_types.EnvConst `yaml:"env" validate:"required"`
+	Port string               `yaml:"port" validate:"required"`
+	Addr string               `yaml:"addr" validate:"required"`
 }
 
 func (c RequiredConfig) GetEnv() value_types.EnvConst {

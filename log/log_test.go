@@ -10,6 +10,14 @@ import (
 type config struct {
 }
 
+func (c config) GetPort() string {
+	return "80"
+}
+
+func (c config) GetAddr() string {
+	return "127.0.0.1"
+}
+
 func (c config) GetEnv() value_types.EnvConst {
 	return value_types.Local
 }
