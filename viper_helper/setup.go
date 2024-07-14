@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/mitchellh/mapstructure"
 	"github.com/spf13/viper"
+	"github.com/sudtanj/Go-SwissKnife/env"
 )
 
 func Initialize[T any](path string, fileName string) (config T) {
@@ -22,4 +23,10 @@ func Initialize[T any](path string, fileName string) (config T) {
 	}
 
 	return conf
+}
+
+func InitializeSafe[T env.IConfig](path string, fileName string) (config T) {
+	config = Initialize[T](path, fileName)
+	ValidateRequiredConfig[T](config)
+	return config
 }
